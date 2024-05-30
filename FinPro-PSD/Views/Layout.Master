@@ -1,0 +1,72 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Layout.master.cs" Inherits="FinPro_PSD.Views.Layout" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <nav>
+                <ul>
+                    <%if (Session["user"] == null)
+                        {
+                    %>
+                    <li>
+                        <asp:HyperLink ID="LoginHl" runat="server" NavigateUrl="~/Views/LoginPage.aspx">Login</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="RegisterHl" runat="server" NavigateUrl="~/Views/RegisterPage.aspx" >Register</asp:HyperLink>
+                    </li>
+                    <%}
+                        else
+                        {
+                            if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "customer")
+                            {%>
+                    <li>
+                        <asp:HyperLink ID="OrderMakeupHl" runat="server">Order Makeup</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="HistoryHl" runat="server">History</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="ProfileHl" runat="server">Profile</asp:HyperLink>
+                    </li>
+                    <%}
+                        else if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
+                        { %>
+                    <li>
+                        <asp:HyperLink ID="HomeHl" runat="server">Home</asp:HyperLink>
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="ManageMakeupHl" runat="server">Manage Makeup</asp:HyperLink>
+
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="OrderQueueHl" runat="server">Order Queue</asp:HyperLink>
+
+                    </li>
+                    <li>
+                        <asp:HyperLink ID="ProfileAdminHl" runat="server">Profile</asp:HyperLink></li>
+                    <li>
+                        <asp:HyperLink ID="TransactionReportHl" runat="server">Transaction Report</asp:HyperLink></li>
+
+                    <%} %>
+                    <li>
+                        <asp:LinkButton ID="LogoutLb" runat="server" OnClick="LogoutLb_Click">Logout</asp:LinkButton>
+                    </li>
+                </ul>
+                <%} %>
+            </nav>
+            <div>
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+        </div>
+    </form>
+</body>
+</html>
