@@ -1,15 +1,22 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="FinPro_PSD.Views.HomePage" %>
+﻿<%@ Page Title="Home - MakeMeUpzz" Language="C#" MasterPageFile="~/Views/Layout.Master" AutoEventWireup="true" CodeBehind="HomePage.aspx.cs" Inherits="FinPro_PSD.Views.HomePage" %>
 
-<!DOCTYPE html>
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
-    <form id="form1" runat="server">
-        <div>
-        </div>
-    </form>
-</body>
-</html>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div>
+        <%if (Session["user"] != null)
+            { %>
+        <asp:Label runat="server" ID="HeaderLbl">Hi <%:((FinPro_PSD.Models.User)Session["user"]).Username %> | Role: <%:((FinPro_PSD.Models.User)Session["user"]).UserRole %></asp:Label>
+        <%} %>
+        <br />
+        <br />
+        <%if (Session["user"] != null)
+            {
+        %>
+        <%if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
+            { %>
+        <asp:GridView runat="server" ID="UserDataGv" EmptyDataText="No User"></asp:GridView>
+        <%} %>
+        <%} %>
+    </div>
+</asp:Content>
