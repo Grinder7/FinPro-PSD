@@ -1,0 +1,44 @@
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Layout.Master" AutoEventWireup="true" CodeBehind="UpdateMakeup.aspx.cs" Inherits="FinPro_PSD.Views.UpdateMakeup" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%if (Session["user"] != null)
+        {
+    %>
+    <%if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
+        { %>
+    <div>
+        <asp:Button ID="BackBtn" runat="server" Text="Back" OnClick="BackBtn_Click" />
+    </div>
+    <div>
+        <div>
+            <asp:Label ID="NameLbl" runat="server" Text="Name"></asp:Label>
+            <asp:TextBox ID="NameTbx" runat="server"></asp:TextBox>
+        </div>
+        <div>
+            <asp:Label ID="PriceLbl" runat="server" Text="Price"></asp:Label>
+            <asp:TextBox ID="PriceTbx" runat="server" TextMode="Number"></asp:TextBox>
+        </div>
+        <div>
+            <asp:Label ID="WeightLbl" runat="server" Text="Weight"></asp:Label>
+            <asp:TextBox ID="WeightTbx" runat="server" TextMode="Number"></asp:TextBox>
+        </div>
+        <div>
+            <asp:Label ID="TypeIDLbl" runat="server" Text="Type ID"></asp:Label>
+            <asp:TextBox ID="TypeIDTbx" runat="server" TextMode="Number"></asp:TextBox>
+        </div>
+        <div>
+            <asp:Label ID="BrandIDLbl" runat="server" Text="Brand ID"></asp:Label>
+            <asp:TextBox ID="BrandIDTbx" runat="server" TextMode="Number"></asp:TextBox>
+        </div>
+        <div>
+            <asp:Label ID="ErrorLbl" runat="server" Text="[Error Label]" Visible="false"></asp:Label>
+        </div>
+        <div>
+            <asp:Button ID="UpdateBtn" runat="server" Text="Update" OnClick="UpdateBtn_Click" />
+        </div>
+    </div>
+    <%} %>
+    <%} %>
+</asp:Content>

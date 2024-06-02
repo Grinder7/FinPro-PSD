@@ -40,10 +40,10 @@
                         else if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
                         { %>
                     <li>
-                        <asp:HyperLink ID="HomeHl" runat="server">Home</asp:HyperLink>
+                        <asp:HyperLink ID="HomeHl" runat="server" NavigateUrl="~/Views/HomePage.aspx">Home</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="ManageMakeupHl" runat="server">Manage Makeup</asp:HyperLink>
+                        <asp:HyperLink ID="ManageMakeupHl" runat="server" NavigateUrl="~/Views/ManageMakeup.aspx">Manage Makeup</asp:HyperLink>
 
                     </li>
                     <li>

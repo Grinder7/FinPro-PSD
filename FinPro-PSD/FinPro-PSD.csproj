@@ -90,19 +90,23 @@
       <LastGenOutput>Model1.cs</LastGenOutput>
     </Content>
     <Content Include="Views\HomePage.aspx" />
+    <Content Include="Views\InsertMakeup.aspx" />
+    <Content Include="Views\InsertMakeUpBrand.aspx" />
+    <Content Include="Views\InsertMakeupType.aspx" />
     <Content Include="Views\LoginPage.aspx" />
+    <Content Include="Views\ManageMakeup.aspx" />
     <Content Include="Views\RegisterPage.aspx" />
+    <Content Include="Views\UpdateMakeup.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\TemplateController.cs" />
+    <Compile Include="Controllers\MakeupController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Factories\TemplateFactory.cs" />
+    <Compile Include="Factories\MakeupFactory.cs" />
     <Compile Include="Factories\UserFactory.cs" />
-    <Compile Include="Handlers\TemplateHandler.cs" />
+    <Compile Include="Handlers\MakeupHandler.cs" />
     <Compile Include="Handlers\UserHandler.cs" />
     <Compile Include="Helpers\Response.cs" />
-    <Compile Include="Helpers\TemplateHelper.cs" />
     <Compile Include="Models\Cart.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -140,14 +144,35 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\MakeupRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
-    <Compile Include="Repositories\TemplateRepository.cs" />
     <Compile Include="Views\HomePage.aspx.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\HomePage.aspx.designer.cs">
       <DependentUpon>HomePage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsertMakeup.aspx.cs">
+      <DependentUpon>InsertMakeup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\InsertMakeup.aspx.designer.cs">
+      <DependentUpon>InsertMakeup.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsertMakeUpBrand.aspx.cs">
+      <DependentUpon>InsertMakeUpBrand.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\InsertMakeUpBrand.aspx.designer.cs">
+      <DependentUpon>InsertMakeUpBrand.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsertMakeupType.aspx.cs">
+      <DependentUpon>InsertMakeupType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\InsertMakeupType.aspx.designer.cs">
+      <DependentUpon>InsertMakeupType.aspx</DependentUpon>
     </Compile>
     <Compile Include="Views\Layout.Master.cs">
       <DependentUpon>Layout.Master</DependentUpon>
@@ -163,12 +188,26 @@
     <Compile Include="Views\LoginPage.aspx.designer.cs">
       <DependentUpon>LoginPage.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Views\ManageMakeup.aspx.cs">
+      <DependentUpon>ManageMakeup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\ManageMakeup.aspx.designer.cs">
+      <DependentUpon>ManageMakeup.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Views\RegisterPage.aspx.cs">
       <DependentUpon>RegisterPage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Views\RegisterPage.aspx.designer.cs">
       <DependentUpon>RegisterPage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateMakeup.aspx.cs">
+      <DependentUpon>UpdateMakeup.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateMakeup.aspx.designer.cs">
+      <DependentUpon>UpdateMakeup.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
