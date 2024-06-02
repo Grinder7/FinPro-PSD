@@ -26,11 +26,13 @@
         </div>
         <div>
             <asp:Label ID="TypeIDLbl" runat="server" Text="Type ID"></asp:Label>
-            <asp:TextBox ID="TypeIDTbx" runat="server" TextMode="Number"></asp:TextBox>
+            <asp:DropDownList ID="TypeIDDdl" runat="server"></asp:DropDownList>
+            <%--<asp:TextBox ID="TypeIDTbx" runat="server" TextMode="Number"></asp:TextBox>--%>
         </div>
         <div>
             <asp:Label ID="BrandIDLbl" runat="server" Text="Brand ID"></asp:Label>
-            <asp:TextBox ID="BrandIDTbx" runat="server" TextMode="Number"></asp:TextBox>
+            <%--<asp:TextBox ID="BrandIDTbx" runat="server" TextMode="Number"></asp:TextBox>--%>
+                        <asp:DropDownList ID="BrandIDDdl" runat="server"></asp:DropDownList>
         </div>
         <div>
             <asp:Label ID="ErrorLbl" runat="server" Text="[Error Label]" Visible="false"></asp:Label>

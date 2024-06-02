@@ -87,13 +87,13 @@ namespace FinPro_PSD.Views
         protected global::System.Web.UI.WebControls.Label TypeIDLbl;
 
         /// <summary>
-        /// TypeIDTbx control.
+        /// TypeIDDdl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TypeIDTbx;
+        protected global::System.Web.UI.WebControls.DropDownList TypeIDDdl;
 
         /// <summary>
         /// BrandIDLbl control.
@@ -105,13 +105,13 @@ namespace FinPro_PSD.Views
         protected global::System.Web.UI.WebControls.Label BrandIDLbl;
 
         /// <summary>
-        /// BrandIDTbx control.
+        /// BrandIDDdl control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox BrandIDTbx;
+        protected global::System.Web.UI.WebControls.DropDownList BrandIDDdl;
 
         /// <summary>
         /// ErrorLbl control.
