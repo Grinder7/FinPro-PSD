@@ -14,15 +14,15 @@ namespace FinPro_PSD.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] != null)
+            if (Session["user"] != null && ((User)Session["user"]).UserRole == "admin")
             {
-                User user = (User)Session["user"];
-                if (user.UserRole == "admin")
-                {
-                    RenderMakeupGridView();
-                    RenderMakeupTypeGridView();
-                    RenderMakeupBrandGridView();
-                }
+                RenderMakeupGridView();
+                RenderMakeupTypeGridView();
+                RenderMakeupBrandGridView();
+            }
+            else
+            {
+                Response.Redirect("~/Views/HomePage.aspx");
             }
         }
 
@@ -61,12 +61,23 @@ namespace FinPro_PSD.Views
         }
         protected void GridView_RowEditingMakeupType(object sender, GridViewEditEventArgs e)
         {
-            
+            int id = Convert.ToInt32(MakeupTypeGv.DataKeys[e.NewEditIndex].Value);
+            Response.Redirect("~/Views/UpdateMakeupType.aspx?Id=" + id);
         }
 
         protected void GridView_RowDeletingMakeupType(object sender, GridViewDeleteEventArgs e)
         {
-            
+            string id = MakeupTypeGv.DataKeys[e.RowIndex].Value.ToString();
+            Response<MakeupType> deleteResponse = MakeupController.RemoveMakeupType(id);
+            if (deleteResponse.IsSuccess)
+            {
+                RenderMakeupGridView();
+                RenderMakeupTypeGridView();
+            }
+            else
+            {
+                Response.Write(deleteResponse.Message);
+            }
         }
 
         protected void GridView_RowEditingMakeupBrand(object sender, GridViewEditEventArgs e)

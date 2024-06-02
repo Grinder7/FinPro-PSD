@@ -56,37 +56,24 @@ namespace FinPro_PSD.Controllers
         }
         public static Response<Makeup> DeleteMakeup(int id)
         {
-            try
+            List<string> errors = new List<string>();
+            IdValidate(id.ToString(), errors);
+            if (errors.Count > 0)
             {
-                Makeup deletedMakeup = MakeupRepository.DeleteMakeup(id);
-                if (deletedMakeup != null)
+                string message = "";
+                foreach (var error in errors)
                 {
-                    return new Response<Makeup>
-                    {
-                        IsSuccess = true,
-                        Message = "Makeup deleted successfully.",
-                        Payload = deletedMakeup
-                    };
+                    message += error + "|";
                 }
-                else
-                {
-                    return new Response<Makeup>
-                    {
-                        IsSuccess = false,
-                        Message = "Failed to delete makeup. Makeup with the given ID does not exist.",
-                        Payload = null
-                    };
-                }
-            }
-            catch (Exception ex)
-            {
+
                 return new Response<Makeup>
                 {
+                    Message = "Validate Error",
                     IsSuccess = false,
-                    Message = $"An error occurred: {ex.Message}",
                     Payload = null
                 };
             }
+            return MakeupHandler.DeleteMakeup(id);
         }
         public static Response<MakeupType> GetMakeupTypeById(int id)
         {
@@ -98,7 +85,7 @@ namespace FinPro_PSD.Controllers
         }
         public static Response<MakeupType> InsertMakeupType(string name)
         {
-            Response<string> response = InsertMakeupTypeRequestValidate(name);
+            Response<string> response = MakeupTypeRequestValidate(name);
             if (!response.IsSuccess)
             {
                 return new Response<MakeupType>
@@ -132,6 +119,63 @@ namespace FinPro_PSD.Controllers
             }
             return MakeupHandler.InsertMakeupBrand(name, Convert.ToInt32(rating));
         }
+        public static Response<MakeupBrand> RemoveMakeupBrandById(string id)
+        {
+            List<string> errors = new List<string>();
+            IdValidate(id, errors);
+            if (errors.Count > 0)
+            {
+                string message = "";
+                foreach (var error in errors)
+                {
+                    message += error + "|";
+                }
+
+                return new Response<MakeupBrand>
+                {
+                    Message = "Validate Error",
+                    IsSuccess = false,
+                    Payload = null
+                };
+            }
+            return MakeupHandler.RemoveMakeupBrandById(Convert.ToInt32(id));
+        }
+        public static Response<MakeupType> UpdateMakeupType(string id, string name)
+        {
+            Response<string> response = UpdateMakeupTypeRequestValidate(id, name);
+            if (!response.IsSuccess)
+            {
+                return new Response<MakeupType>
+                {
+                    Message = response.Payload,
+                    IsSuccess = false,
+                    Payload = null
+                };
+            }
+            return MakeupHandler.UpdateMakeupType(Convert.ToInt32(id), name);
+        }
+        public static Response<MakeupType> RemoveMakeupType(string id)
+        {
+            List<string> errors = new List<string>();
+            IdValidate(id, errors);
+            if (errors.Count > 0)
+            {
+                string message = "";
+                foreach (var error in errors)
+                {
+                    message += error + "|";
+                }
+
+                return new Response<MakeupType>
+                {
+                    Message = "Validate Error",
+                    IsSuccess = false,
+                    Payload = null
+                };
+            }
+            return MakeupHandler.RemoveMakeupType(Convert.ToInt32(id));
+        }
+
         private static Response<string> InsertMakeupRequestValidate(string name, string price, string weight, string typeid, string brandid)
         {
             List<string> errors = new List<string>();
@@ -202,7 +246,7 @@ namespace FinPro_PSD.Controllers
                 int? idInt = Convert.ToInt32(id);
                 if (!idInt.HasValue)
                 {
-                    errors.Add("Price is null");
+                    errors.Add("Id is null");
                 }
             }
             catch (Exception)
@@ -312,9 +356,37 @@ namespace FinPro_PSD.Controllers
 
             }
         }
-        private static Response<string> InsertMakeupTypeRequestValidate(string name)
+        private static Response<string> MakeupTypeRequestValidate(string name)
         {
             List<string> errors = new List<string>();
+            NameValidate(name, errors);
+            if (errors.Count > 0)
+            {
+                string message = "";
+                foreach (var error in errors)
+                {
+                    message += error + "|";
+                }
+
+                return new Response<string>
+                {
+                    Message = "Validate Error",
+                    IsSuccess = false,
+                    Payload = message
+                };
+            }
+
+            return new Response<string>
+            {
+                Message = "Success",
+                IsSuccess = true,
+                Payload = null
+            };
+        }
+        private static Response<string> UpdateMakeupTypeRequestValidate(string id, string name)
+        {
+            List<string> errors = new List<string>();
+            IdValidate(id, errors);
             NameValidate(name, errors);
             if (errors.Count > 0)
             {
@@ -433,27 +505,5 @@ namespace FinPro_PSD.Controllers
                 Payload = null
             };
         }
-        public static Response<MakeupBrand> RemoveMakeupBrandById(string id)
-        {
-            List<string> errors = new List<string>();
-            IdValidate(id, errors);
-            if (errors.Count > 0)
-            {
-                string message = "";
-                foreach (var error in errors)
-                {
-                    message += error + "|";
-                }
-
-                return new Response<MakeupBrand>
-                {
-                    Message = "Validate Error",
-                    IsSuccess = false,
-                    Payload = null
-                };
-            }
-            return MakeupHandler.RemoveMakeupBrandById(Convert.ToInt32(id));
-        }
-
     }
 }

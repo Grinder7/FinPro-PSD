@@ -111,7 +111,26 @@ namespace FinPro_PSD.Repositories
                 db.MakeupBrands.Remove(deletedMakeupBrand);
             }
             return db.SaveChanges();
-            
+        }
+        public static MakeupType UpdateMakeupType(MakeupType makeup)
+        {
+            MakeupType updatedMakeupType = db.MakeupTypes.Find(makeup.MakeupTypeID);
+            updatedMakeupType.MakeupTypeName = makeup.MakeupTypeName;
+            db.SaveChanges();
+            return makeup;
+        }
+        public static int DeleteMakeupTypeById(int id)
+        {
+            MakeupType deletedMakeupType = db.MakeupTypes.Find(id);
+            if (deletedMakeupType != null)
+            {
+                db.MakeupTypes.Remove(deletedMakeupType);
+            }
+            return db.SaveChanges();
+        }
+        public static List<Makeup> GetMakeupsByMakeupTypeId(int typeId)
+        {
+            return db.Makeups.Where(x => x.MakeupTypeID == typeId).ToList();
         }
     }
 }

@@ -14,7 +14,34 @@ namespace FinPro_PSD.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["user"] == null)
+            if (Session["user"] != null)
+            {
+                User user = (User)Session["user"];
+                if (user.UserRole != "admin")
+                {
+                    Response.Redirect("~/Views/HomePage.aspx");
+                }
+                if (!Page.IsPostBack)
+                {
+                    Response<List<MakeupType>> response = MakeupController.GetAllMakeupTypes();
+                    if (response.IsSuccess)
+                    {
+                        TypeIDDdl.DataSource = response.Payload;
+                        TypeIDDdl.DataValueField = "MakeupTypeID";
+                        TypeIDDdl.DataTextField = "MakeupTypeName";
+                        TypeIDDdl.DataBind();
+                    }
+                    Response<List<MakeupBrand>> response2 = MakeupController.GetAllMakeupBrands();
+                    if (response2.IsSuccess)
+                    {
+                        BrandIDDdl.DataSource = response2.Payload;
+                        BrandIDDdl.DataValueField = "MakeupBrandID";
+                        BrandIDDdl.DataTextField = "MakeupBrandName";
+                        BrandIDDdl.DataBind();
+                    }
+                }
+            }
+            else
             {
                 Response.Redirect("~/Views/HomePage.aspx");
             }
@@ -27,8 +54,11 @@ namespace FinPro_PSD.Views
                 string name = NameTbx.Text;
                 string price = PriceTbx.Text;
                 string weight = WeightTbx.Text;
-                string typeid = TypeIDTbx.Text;
-                string brandid = BrandIDTbx.Text;
+                string typeid = "1";
+                string brandid = "1";
+                //string typeid = TypeIDDdl.SelectedValue;
+                //string brandid = BrandIDDdl.SelectedValue;
+
 
                 Response<Makeup> response = MakeupController.InsertMakeup(name, price, weight, typeid, brandid);
                 if (response.IsSuccess)
@@ -43,9 +73,7 @@ namespace FinPro_PSD.Views
             {
                 ErrorLbl.Text = error.Message;
                 ErrorLbl.Visible = true;
-
             }
-
         }
 
         protected void BackBtn_Click(object sender, EventArgs e)

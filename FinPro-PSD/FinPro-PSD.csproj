@@ -98,6 +98,7 @@
     <Content Include="Views\RegisterPage.aspx" />
     <Content Include="Views\UpdateMakeup.aspx" />
     <Content Include="Views\UpdateMakeupBrand.aspx" />
+    <Content Include="Views\UpdateMakeupType.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -216,6 +217,13 @@
     </Compile>
     <Compile Include="Views\UpdateMakeupBrand.aspx.designer.cs">
       <DependentUpon>UpdateMakeupBrand.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UpdateMakeupType.aspx.cs">
+      <DependentUpon>UpdateMakeupType.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\UpdateMakeupType.aspx.designer.cs">
+      <DependentUpon>UpdateMakeupType.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
