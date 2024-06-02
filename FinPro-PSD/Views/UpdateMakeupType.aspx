@@ -3,9 +3,15 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%if (Session["user"] != null)
+        {
+    %>
+    <%if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
+        { %>
+    <h2>Update Makeup Type</h2>
+
     <div>
         <asp:Button ID="BackBtn" runat="server" Text="Back" OnClick="BackBtn_Click" />
-        <h1>Update Makeup Type</h1>
         <div>
             <asp:Label ID="MakeupTypeIdLbl" runat="server" Text="Id"></asp:Label>
             <asp:TextBox ID="MakeupTypeIdTbx" runat="server" ReadOnly="true"></asp:TextBox>
@@ -21,4 +27,6 @@
             <asp:Button ID="UpdateMakeupTypeBtn" runat="server" Text="Update" OnClick="UpdateMakeupTypeBtn_Click" />
         </div>
     </div>
+    <%} %>
+    <%} %>
 </asp:Content>

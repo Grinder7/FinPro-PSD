@@ -23,7 +23,7 @@ namespace FinPro_PSD.Views
                 }
                 if (!Page.IsPostBack)
                 {
-                    Response<List<MakeupType>> response = MakeupController.GetAllMakeupTypes();
+                    Response<List<MakeupType>> response = MakeupTypeController.GetAllMakeupTypes();
                     if (response.IsSuccess)
                     {
                         TypeIDDdl.DataSource = response.Payload;
@@ -31,7 +31,7 @@ namespace FinPro_PSD.Views
                         TypeIDDdl.DataTextField = "MakeupTypeName";
                         TypeIDDdl.DataBind();
                     }
-                    Response<List<MakeupBrand>> response2 = MakeupController.GetAllMakeupBrands();
+                    Response<List<MakeupBrand>> response2 = MakeupBrandController.GetAllMakeupBrands();
                     if (response2.IsSuccess)
                     {
                         BrandIDDdl.DataSource = response2.Payload;
@@ -54,11 +54,8 @@ namespace FinPro_PSD.Views
                 string name = NameTbx.Text;
                 string price = PriceTbx.Text;
                 string weight = WeightTbx.Text;
-                string typeid = "1";
-                string brandid = "1";
-                //string typeid = TypeIDDdl.SelectedValue;
-                //string brandid = BrandIDDdl.SelectedValue;
-
+                string typeid = TypeIDDdl.SelectedValue;
+                string brandid = BrandIDDdl.SelectedValue;
 
                 Response<Makeup> response = MakeupController.InsertMakeup(name, price, weight, typeid, brandid);
                 if (response.IsSuccess)

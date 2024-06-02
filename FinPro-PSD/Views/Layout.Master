@@ -20,7 +20,7 @@
                         <asp:HyperLink ID="LoginHl" runat="server" NavigateUrl="~/Views/LoginPage.aspx">Login</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="RegisterHl" runat="server" NavigateUrl="~/Views/RegisterPage.aspx" >Register</asp:HyperLink>
+                        <asp:HyperLink ID="RegisterHl" runat="server" NavigateUrl="~/Views/RegisterPage.aspx">Register</asp:HyperLink>
                     </li>
                     <%}
                         else

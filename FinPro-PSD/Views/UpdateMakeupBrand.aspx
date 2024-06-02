@@ -1,10 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Views/Layout.Master" AutoEventWireup="true" CodeBehind="UpdateMakeupBrand.aspx.cs" Inherits="FinPro_PSD.Views.UpdateMakeupBrand" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <%if (Session["user"] != null)
+        {
+    %>
+    <%if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
+        { %>
+    <h2>Update Makeup Brand</h2>
+
     <div>
         <asp:Button ID="BackBtn" runat="server" Text="Back" OnClick="BackBtn_Click" />
-        <h1>Update Makeup Brand</h1>
         <div>
             <asp:Label ID="MakeupBrandIdLbl" runat="server" Text="Id"></asp:Label>
             <asp:TextBox ID="MakeupBrandIdTbx" runat="server" ReadOnly="true"></asp:TextBox>
@@ -24,4 +31,6 @@
             <asp:Button ID="UpdateMakeupBrandBtn" runat="server" Text="Update" OnClick="UpdateMakeupBrandBtn_Click" />
         </div>
     </div>
+    <%} %>
+    <%} %>
 </asp:Content>

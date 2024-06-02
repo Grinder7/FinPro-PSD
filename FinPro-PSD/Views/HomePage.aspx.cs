@@ -14,11 +14,11 @@ namespace FinPro_PSD.Views
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(Session["user"] != null)
+            if (Session["user"] != null)
             {
                 User user = (User)Session["user"];
 
-                if(user.UserRole == "admin")
+                if (user.UserRole == "admin")
                 {
                     Response<List<User>> response = UserController.GetAllUsers();
                     if (response.IsSuccess)

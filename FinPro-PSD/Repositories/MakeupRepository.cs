@@ -50,87 +50,13 @@ namespace FinPro_PSD.Repositories
             }
             return deletedMakeup;
         }
-
-
-        public static MakeupType GetMakeupTypeById(int id)
-        {
-            return db.MakeupTypes.Find(id);
-        }
-
-        public static MakeupType GetLastMakeupType()
-        {
-            return db.MakeupTypes.ToList().LastOrDefault();
-        }
-        public static List<MakeupType> GetAllMakeupTypes()
-        {
-            return db.MakeupTypes.ToList();
-        }
-        public static int InsertMakeupType(MakeupType makeup)
-        {
-            db.MakeupTypes.Add(makeup);
-            return db.SaveChanges();
-        }
-
-        public static MakeupBrand GetMakeupBrandById(int id)
-        {
-            return db.MakeupBrands.Find(id);
-        }
-        public static MakeupBrand GetLastMakeupBrand()
-        {
-            return db.MakeupBrands.ToList().LastOrDefault();
-        }
-        public static List<MakeupBrand> GetAllMakeupBrands()
-        {
-            return db.MakeupBrands.ToList();
-        }
-        public static int InsertMakeupBrand(MakeupBrand makeup)
-        {
-            db.MakeupBrands.Add(makeup);
-            return db.SaveChanges();
-        }
-
-        public static MakeupBrand UpdateMakeupBrand(MakeupBrand makeup)
-        {
-            MakeupBrand updatedMakeupBrand = db.MakeupBrands.Find(makeup.MakeupBrandID);
-            updatedMakeupBrand.MakeupBrandName = makeup.MakeupBrandName;
-            updatedMakeupBrand.MakeupBrandRating = makeup.MakeupBrandRating;
-            db.SaveChanges();
-            return makeup;
-        }
-
-        public static List<Makeup> GetMakeupsByBrandId(int brandId)
-        {
-            return db.Makeups.Where(x => x.MakeupBrandID == brandId).ToList();
-        }
-
-        public static int DeleteMakeupBrandById(int id)
-        {
-            MakeupBrand deletedMakeupBrand = db.MakeupBrands.Find(id);
-            if (deletedMakeupBrand != null)
-            {
-                db.MakeupBrands.Remove(deletedMakeupBrand);
-            }
-            return db.SaveChanges();
-        }
-        public static MakeupType UpdateMakeupType(MakeupType makeup)
-        {
-            MakeupType updatedMakeupType = db.MakeupTypes.Find(makeup.MakeupTypeID);
-            updatedMakeupType.MakeupTypeName = makeup.MakeupTypeName;
-            db.SaveChanges();
-            return makeup;
-        }
-        public static int DeleteMakeupTypeById(int id)
-        {
-            MakeupType deletedMakeupType = db.MakeupTypes.Find(id);
-            if (deletedMakeupType != null)
-            {
-                db.MakeupTypes.Remove(deletedMakeupType);
-            }
-            return db.SaveChanges();
-        }
         public static List<Makeup> GetMakeupsByMakeupTypeId(int typeId)
         {
             return db.Makeups.Where(x => x.MakeupTypeID == typeId).ToList();
+        }
+        public static List<Makeup> GetMakeupsByBrandId(int brandId)
+        {
+            return db.Makeups.Where(x => x.MakeupBrandID == brandId).ToList();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FinPro_PSD.Views
                 }
                 if (!Page.IsPostBack)
                 {
-                    Response<MakeupBrand> response = MakeupController.GetMakeupBrandById(Convert.ToInt32(Request.QueryString["Id"]));
+                    Response<MakeupBrand> response = MakeupBrandController.GetMakeupBrandById(Convert.ToInt32(Request.QueryString["Id"]));
                     if (response.IsSuccess)
                     {
                         MakeupBrand makeupBrand = response.Payload;
@@ -54,7 +54,7 @@ namespace FinPro_PSD.Views
             string name = MakeupBrandNameTbx.Text;
             string rating = MakeupBrandRatingTbx.Text;
 
-            Response<MakeupBrand> response = MakeupController.UpdateMakeupBrand(id, name, rating);
+            Response<MakeupBrand> response = MakeupBrandController.UpdateMakeupBrand(id, name, rating);
 
             if (response.IsSuccess)
             {

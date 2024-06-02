@@ -8,6 +8,7 @@
     %>
     <%if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
         { %>
+    <h2>Insert Makeup</h2>
     <div>
         <asp:Button ID="BackBtn" runat="server" Text="Back" OnClick="BackBtn_Click" />
     </div>
@@ -26,12 +27,10 @@
         </div>
         <div>
             <asp:Label ID="TypeIDLbl" runat="server" Text="Type ID"></asp:Label>
-            <%--<asp:TextBox ID="TypeIDTbx" runat="server" TextMode="Number"></asp:TextBox>--%>
             <asp:DropDownList ID="TypeIDDdl" runat="server"></asp:DropDownList>
         </div>
         <div>
             <asp:Label ID="BrandIDLbl" runat="server" Text="Brand ID"></asp:Label>
-            <%--<asp:TextBox ID="BrandIDTbx" runat="server" TextMode="Number"></asp:TextBox>--%>
             <asp:DropDownList ID="BrandIDDdl" runat="server"></asp:DropDownList>
         </div>
         <div>

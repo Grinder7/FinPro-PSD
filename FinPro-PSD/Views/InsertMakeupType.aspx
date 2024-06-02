@@ -8,6 +8,8 @@
     %>
     <%if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")
         { %>
+        <h2>Insert Makeup Type</h2>
+
     <div>
         <asp:Button ID="BackBtn" runat="server" Text="Back" OnClick="BackBtn_Click" />
     </div>

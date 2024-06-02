@@ -23,7 +23,7 @@ namespace FinPro_PSD.Views
                 }
                 if (!Page.IsPostBack)
                 {
-                    Response<MakeupType> response = MakeupController.GetMakeupTypeById(Convert.ToInt32(Request.QueryString["Id"]));
+                    Response<MakeupType> response = MakeupTypeController.GetMakeupTypeById(Convert.ToInt32(Request.QueryString["Id"]));
                     if (response.IsSuccess)
                     {
                         MakeupType makeupType = response.Payload;
@@ -51,7 +51,7 @@ namespace FinPro_PSD.Views
             string id = MakeupTypeIdTbx.Text;
             string name = MakeupTypeNameTbx.Text;
 
-            Response<MakeupType> response = MakeupController.UpdateMakeupType(id, name);
+            Response<MakeupType> response = MakeupTypeController.UpdateMakeupType(id, name);
 
             if (response.IsSuccess)
             {

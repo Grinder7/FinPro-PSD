@@ -20,23 +20,5 @@ namespace FinPro_PSD.Factories
                 MakeupBrandID = brandid
             };
         }
-        public static MakeupType CreateMakeupType(int id, string name)
-        {
-            return new MakeupType
-            {
-                MakeupTypeID = id,
-                MakeupTypeName = name
-            };
-        }
-
-        public static MakeupBrand CreateMakeupBrand(int id, string name, int rating)
-        {
-            return new MakeupBrand
-            {
-                MakeupBrandID = id,
-                MakeupBrandName = name,
-                MakeupBrandRating = rating
-            };
-        }
     }
 }

@@ -68,7 +68,7 @@ namespace FinPro_PSD.Views
         protected void GridView_RowDeletingMakeupType(object sender, GridViewDeleteEventArgs e)
         {
             string id = MakeupTypeGv.DataKeys[e.RowIndex].Value.ToString();
-            Response<MakeupType> deleteResponse = MakeupController.RemoveMakeupType(id);
+            Response<MakeupType> deleteResponse = MakeupTypeController.RemoveMakeupType(id);
             if (deleteResponse.IsSuccess)
             {
                 RenderMakeupGridView();
@@ -88,8 +88,8 @@ namespace FinPro_PSD.Views
 
         protected void GridView_RowDeletingMakeupBrand(object sender, GridViewDeleteEventArgs e)
         {
-            string id = MakeupTypeGv.DataKeys[e.RowIndex].Value.ToString();
-            Response<MakeupBrand> deleteResponse = MakeupController.RemoveMakeupBrandById(id);
+            string id = MakeupBrandGv.DataKeys[e.RowIndex].Value.ToString();
+            Response<MakeupBrand> deleteResponse = MakeupBrandController.RemoveMakeupBrandById(id);
 
             if (deleteResponse.IsSuccess)
             {
@@ -114,7 +114,7 @@ namespace FinPro_PSD.Views
 
         private void RenderMakeupTypeGridView()
         {
-            Response<List<MakeupType>> response = MakeupController.GetAllMakeupTypes();
+            Response<List<MakeupType>> response = MakeupTypeController.GetAllMakeupTypes();
             if (response.IsSuccess)
             {
                 MakeupTypeGv.DataSource = response.Payload;
@@ -124,7 +124,7 @@ namespace FinPro_PSD.Views
 
         private void RenderMakeupBrandGridView()
         {
-            Response<List<MakeupBrand>> response = MakeupController.GetAllMakeupBrands();
+            Response<List<MakeupBrand>> response = MakeupBrandController.GetAllMakeupBrands();
             if (response.IsSuccess)
             {
                 MakeupBrandGv.DataSource = response.Payload;

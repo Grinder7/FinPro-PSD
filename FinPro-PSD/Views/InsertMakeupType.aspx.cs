@@ -26,7 +26,7 @@ namespace FinPro_PSD.Views
             {
                 string name = NameTbx.Text;
 
-                Response<MakeupType> response = MakeupController.InsertMakeupType(name);
+                Response<MakeupType> response = MakeupTypeController.InsertMakeupType(name);
                 if (response.IsSuccess)
                 {
                     Response.Redirect("~/Views/ManageMakeup.aspx");
