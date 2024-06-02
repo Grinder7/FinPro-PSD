@@ -19,25 +19,9 @@ namespace FinPro_PSD.Views
                 User user = (User)Session["user"];
                 if (user.UserRole == "admin")
                 {
-                    Response<List<Makeup>> responseMakeup = MakeupController.GetAllMakeups();
-                    Response<List<MakeupType>> responseMakeupType = MakeupController.GetAllMakeupTypes();
-                    Response<List<MakeupBrand>> responseMakeupBrand = MakeupController.GetAllMakeupBrands();
-
-                    if (responseMakeup.IsSuccess)
-                    {
-                        MakeupGv.DataSource = responseMakeup.Payload;
-                        MakeupGv.DataBind();
-                    }
-                    if (responseMakeupType.IsSuccess)
-                    {
-                        MakeupTypeGv.DataSource = responseMakeupType.Payload;
-                        MakeupTypeGv.DataBind();
-                    }
-                    if (responseMakeupBrand.IsSuccess)
-                    {
-                        MakeupBrandGv.DataSource = responseMakeupBrand.Payload;
-                        MakeupBrandGv.DataBind();
-                    }
+                    RenderMakeupGridView();
+                    RenderMakeupTypeGridView();
+                    RenderMakeupBrandGridView();
                 }
             }
         }
@@ -71,12 +55,7 @@ namespace FinPro_PSD.Views
 
             if (deleteResponse.IsSuccess)
             {
-                Response<List<Makeup>> response = MakeupController.GetAllMakeups();
-                if (response.IsSuccess)
-                {
-                    MakeupGv.DataSource = response.Payload;
-                    MakeupGv.DataBind();
-                }
+                RenderMakeupGridView();
             }
 
         }
@@ -87,19 +66,59 @@ namespace FinPro_PSD.Views
 
         protected void GridView_RowDeletingMakeupType(object sender, GridViewDeleteEventArgs e)
         {
-
-
+            
         }
 
         protected void GridView_RowEditingMakeupBrand(object sender, GridViewEditEventArgs e)
         {
-
+            int id = Convert.ToInt32(MakeupBrandGv.DataKeys[e.NewEditIndex].Value);
+            Response.Redirect("~/Views/UpdateMakeupBrand.aspx?Id=" + id);
         }
 
         protected void GridView_RowDeletingMakeupBrand(object sender, GridViewDeleteEventArgs e)
         {
+            string id = MakeupTypeGv.DataKeys[e.RowIndex].Value.ToString();
+            Response<MakeupBrand> deleteResponse = MakeupController.RemoveMakeupBrandById(id);
 
+            if (deleteResponse.IsSuccess)
+            {
+                RenderMakeupGridView();
+                RenderMakeupBrandGridView();
+            }
+            else
+            {
+                Response.Write(deleteResponse.Message);
+            }
+        }
 
+        private void RenderMakeupGridView()
+        {
+            Response<List<Makeup>> response = MakeupController.GetAllMakeups();
+            if (response.IsSuccess)
+            {
+                MakeupGv.DataSource = response.Payload;
+                MakeupGv.DataBind();
+            }
+        }
+
+        private void RenderMakeupTypeGridView()
+        {
+            Response<List<MakeupType>> response = MakeupController.GetAllMakeupTypes();
+            if (response.IsSuccess)
+            {
+                MakeupTypeGv.DataSource = response.Payload;
+                MakeupTypeGv.DataBind();
+            }
+        }
+
+        private void RenderMakeupBrandGridView()
+        {
+            Response<List<MakeupBrand>> response = MakeupController.GetAllMakeupBrands();
+            if (response.IsSuccess)
+            {
+                MakeupBrandGv.DataSource = response.Payload;
+                MakeupBrandGv.DataBind();
+            }
         }
     }
 }
