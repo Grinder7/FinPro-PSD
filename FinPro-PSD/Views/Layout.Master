@@ -28,13 +28,13 @@
                             if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "customer")
                             {%>
                     <li>
-                        <asp:HyperLink ID="OrderMakeupHl" runat="server">Order Makeup</asp:HyperLink>
+                        <asp:HyperLink ID="OrderMakeupHl" runat="server" NavigateUrl="~/Views/OrderMakeupPage.aspx">Order Makeup</asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink ID="HistoryHl" runat="server">History</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="ProfileHl" runat="server">Profile</asp:HyperLink>
+                        <asp:HyperLink ID="ProfileHl" runat="server" NavigateUrl="~/Views/ProfilePage.aspx">Profile</asp:HyperLink>
                     </li>
                     <%}
                         else if (((FinPro_PSD.Models.User)Session["user"]).UserRole == "admin")

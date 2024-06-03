@@ -35,5 +35,15 @@ namespace FinPro_PSD.Repositories
             db.Users.Add(user);
             return db.SaveChanges();
         }
+
+        public static int UpdateUser(User user)
+        {
+            User oldUser = GetUserById(user.UserID);
+            oldUser.Username = user.Username;
+            oldUser.UserEmail = user.UserEmail;
+            oldUser.UserGender = user.UserGender;
+            oldUser.UserPassword = user.UserPassword;
+            return db.SaveChanges();
+        }
     }
 }

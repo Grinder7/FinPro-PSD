@@ -27,7 +27,7 @@
             <PropertyRef Name="MakeupID" />
           </Key>
           <Property Name="MakeupID" Type="int" Nullable="false" />
-          <Property Name="MakeupName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="MakeupName" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="MakeupPrice" Type="int" Nullable="false" />
           <Property Name="MakeupWeight" Type="int" Nullable="false" />
           <Property Name="MakeupTypeID" Type="int" Nullable="false" />
@@ -40,14 +40,11 @@
           <Property Name="MakeupTypeID" Type="int" Nullable="false" />
           <Property Name="MakeupTypeName" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPRO-PSD\FINPRO-PSD\APP_DATA\DATABASE1.MDF.dbo.TransactionDetails' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TransactionDetails">
           <Key>
-            <PropertyRef Name="TransactionID" />
-            <PropertyRef Name="MakeupID" />
-            <PropertyRef Name="Quantity" />
+            <PropertyRef Name="TransactionDetailID" />
           </Key>
+          <Property Name="TransactionDetailID" Type="int" Nullable="false" />
           <Property Name="TransactionID" Type="int" Nullable="false" />
           <Property Name="MakeupID" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -162,15 +159,9 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
           <EntitySet Name="MakeupBrands" EntityType="Self.MakeupBrands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Makeups" EntityType="Self.Makeups" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MakeupTypes" EntityType="Self.MakeupTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TransactionHeaders" EntityType="Self.TransactionHeaders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetails" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [TransactionDetails].[TransactionID] AS [TransactionID], 
-    [TransactionDetails].[MakeupID] AS [MakeupID], 
-    [TransactionDetails].[Quantity] AS [Quantity]
-    FROM [dbo].[TransactionDetails] AS [TransactionDetails]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_Carts_ToMakeups" Association="Self.FK_Carts_ToMakeups">
             <End Role="Makeups" EntitySet="Makeups" />
             <End Role="Carts" EntitySet="Carts" />
@@ -230,7 +221,7 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
             <PropertyRef Name="MakeupID" />
           </Key>
           <Property Name="MakeupID" Type="Int32" Nullable="false" />
-          <Property Name="MakeupName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MakeupName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="MakeupPrice" Type="Int32" Nullable="false" />
           <Property Name="MakeupWeight" Type="Int32" Nullable="false" />
           <Property Name="MakeupTypeID" Type="Int32" Nullable="false" />
@@ -247,6 +238,17 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
           <Property Name="MakeupTypeID" Type="Int32" Nullable="false" />
           <Property Name="MakeupTypeName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Makeups" Relationship="Self.FK_Makeups_ToMakeupTypes" FromRole="MakeupTypes" ToRole="Makeups" />
+        </EntityType>
+        <EntityType Name="TransactionDetail">
+          <Key>
+            <PropertyRef Name="TransactionDetailID" />
+          </Key>
+          <Property Name="TransactionDetailID" Type="Int32" Nullable="false" />
+          <Property Name="TransactionID" Type="Int32" Nullable="false" />
+          <Property Name="MakeupID" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Makeup" Relationship="Self.FK_TransactionDetails_ToMakeups" FromRole="TransactionDetails" ToRole="Makeups" />
+          <NavigationProperty Name="TransactionHeader" Relationship="Self.FK_TransactionDetails_ToTransactionHeaders" FromRole="TransactionDetails" ToRole="TransactionHeaders" />
         </EntityType>
         <EntityType Name="TransactionHeader">
           <Key>
@@ -272,18 +274,6 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
           <Property Name="UserPassword" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="Carts" Relationship="Self.FK_Carts_ToUsers" FromRole="Users" ToRole="Carts" />
           <NavigationProperty Name="TransactionHeaders" Relationship="Self.FK_TransactionHeaders_ToUsers" FromRole="Users" ToRole="TransactionHeaders" />
-        </EntityType>
-        <EntityType Name="TransactionDetail">
-          <Key>
-            <PropertyRef Name="TransactionID" />
-            <PropertyRef Name="MakeupID" />
-            <PropertyRef Name="Quantity" />
-          </Key>
-          <Property Name="TransactionID" Type="Int32" Nullable="false" />
-          <Property Name="MakeupID" Type="Int32" Nullable="false" />
-          <Property Name="Quantity" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Makeup" Relationship="Self.FK_TransactionDetails_ToMakeups" FromRole="TransactionDetails" ToRole="Makeups" />
-          <NavigationProperty Name="TransactionHeader" Relationship="Self.FK_TransactionDetails_ToTransactionHeaders" FromRole="TransactionDetails" ToRole="TransactionHeaders" />
         </EntityType>
         <Association Name="FK_Carts_ToMakeups">
           <End Role="Makeups" Type="Self.Makeup" Multiplicity="1" />
@@ -374,9 +364,9 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
           <EntitySet Name="MakeupBrands" EntityType="Self.MakeupBrand" />
           <EntitySet Name="Makeups" EntityType="Self.Makeup" />
           <EntitySet Name="MakeupTypes" EntityType="Self.MakeupType" />
+          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetail" />
           <EntitySet Name="TransactionHeaders" EntityType="Self.TransactionHeader" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <EntitySet Name="TransactionDetails" EntityType="Self.TransactionDetail" />
           <AssociationSet Name="FK_Carts_ToMakeups" Association="Self.FK_Carts_ToMakeups">
             <End Role="Makeups" EntitySet="Makeups" />
             <End Role="Carts" EntitySet="Carts" />
@@ -451,6 +441,16 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="TransactionDetails">
+            <EntityTypeMapping TypeName="Database1Model.TransactionDetail">
+              <MappingFragment StoreEntitySet="TransactionDetails">
+                <ScalarProperty Name="TransactionDetailID" ColumnName="TransactionDetailID" />
+                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
+                <ScalarProperty Name="MakeupID" ColumnName="MakeupID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="TransactionHeaders">
             <EntityTypeMapping TypeName="Database1Model.TransactionHeader">
               <MappingFragment StoreEntitySet="TransactionHeaders">
@@ -471,15 +471,6 @@ warning 6002: The table/view 'D:\CODE\(LAB) PATTERN SOFTWARE DESIGN\FINPRO\FINPR
                 <ScalarProperty Name="UserGender" ColumnName="UserGender" />
                 <ScalarProperty Name="UserRole" ColumnName="UserRole" />
                 <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TransactionDetails">
-            <EntityTypeMapping TypeName="Database1Model.TransactionDetail">
-              <MappingFragment StoreEntitySet="TransactionDetails">
-                <ScalarProperty Name="TransactionID" ColumnName="TransactionID" />
-                <ScalarProperty Name="MakeupID" ColumnName="MakeupID" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
