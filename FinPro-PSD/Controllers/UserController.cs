@@ -12,8 +12,48 @@ namespace FinPro_PSD.Controllers
 {
     public class UserController
     {
+
+        public static Response<User> UpdateUserData(int userId, string userName, string userEmail, DateTime userDob, string userGender)
+        {
+            List<string> errors = new List<string>();
+            UserIdValidate(userId, errors);
+            UsernameValidate(userName, errors);
+            EmailValidate(userEmail, errors);
+            DOBValidate(userDob, errors);
+            GenderValidate(userGender, errors);
+
+            if (errors.Count > 0)
+            {
+                return GenerateErrorResponse<User>(errors);
+            }
+            return UserHandler.UpdateUserData(userId, userName, userEmail, userDob, userGender);
+        }
+
+        public static Response<User> UpdateUserPassword(int userId, string oldPassword, string newPassword)
+        {
+            List<string> errors = new List<string>();
+            UserIdValidate(userId, errors);
+            PasswordValidate(oldPassword, errors);
+            PasswordValidate(newPassword, errors);
+            if (oldPassword == newPassword)
+            {
+                errors.Add("New password must be different from old password");
+            }
+            if (errors.Count > 0)
+            {
+                return GenerateErrorResponse<User>(errors);
+            }
+            return UserHandler.UpdateUserPassword(userId, newPassword);
+        }
+
         public static Response<User> GetUserById(int id)
         {
+            List<string> errors = new List<string>();
+            UserIdValidate(id, errors);
+            if (errors.Count > 0)
+            {
+                return GenerateErrorResponse<User>(errors);
+            }
             return UserHandler.GetUserById(id);
         }
 
@@ -21,39 +61,20 @@ namespace FinPro_PSD.Controllers
         {
             return UserHandler.GetAllUsers();
         }
+
         public static Response<User> Login(string username, string password)
         {
-            Response<string> response = LoginRequestValidate(username, password);
-            if (!response.IsSuccess)
+            List<string> errors = new List<string>();
+            UsernameValidate(username, errors);
+            PasswordValidate(password, errors);
+            if (errors.Count > 0)
             {
-                return new Response<User>
-                {
-                    Message = response.Payload,
-                    IsSuccess = false,
-                    Payload = null
-                };
+                return GenerateErrorResponse<User>(errors);
             }
             return UserHandler.Login(username, password);
         }
 
         public static Response<User> Register(string username, string email, DateTime dob, string gender, string password, string confirmPassword)
-        {
-            Response<string> response = RegisterRequestValidate(username, email, dob, gender, password, confirmPassword);
-
-            if (!response.IsSuccess)
-            {
-                return new Response<User>
-                {
-                    Message = response.Payload,
-                    IsSuccess = false,
-                    Payload = null
-                };
-            }
-
-            return UserHandler.Register(username, email, dob, gender, password);
-
-        }
-        private static Response<string> RegisterRequestValidate(string username, string email, DateTime dob, string gender, string password, string confirmPassword)
         {
             List<string> errors = new List<string>();
             UsernameValidate(username, errors);
@@ -64,56 +85,32 @@ namespace FinPro_PSD.Controllers
             ConfirmPasswordValidate(password, confirmPassword, errors);
             if (errors.Count > 0)
             {
-                string message = "";
-                foreach (var error in errors)
-                {
-                    message += error + "|";
-                }
-
-                return new Response<string>
-                {
-                    Message = "Validate Error",
-                    IsSuccess = false,
-                    Payload = message
-                };
+                GenerateErrorResponse<User>(errors);
             }
+            return UserHandler.Register(username, email, dob, gender, password);
+        }
 
-            return new Response<string>
+        private static Response<T> GenerateErrorResponse<T>(List<string> errors)
+        {
+            string message = "";
+            foreach (var error in errors)
             {
-                Message = "Success",
-                IsSuccess = true,
-                Payload = null
+                message += error + "|";
+            }
+            return new Response<T>
+            {
+                Message = message,
+                IsSuccess = false,
+                Payload = default
             };
         }
 
-        private static Response<string> LoginRequestValidate(string username, string password)
+        private static void UserIdValidate(int userId, List<string> errors)
         {
-            List<string> errors = new List<string>();
-            UsernameValidate(username, errors);
-            PasswordValidate(password, errors);
-
-            if (errors.Count > 0)
+            if (userId <= 0)
             {
-                string message = "";
-                foreach (var error in errors)
-                {
-                    message += error + "|";
-                }
-
-                return new Response<string>
-                {
-                    Message = "Validate Error",
-                    IsSuccess = false,
-                    Payload = message
-                };
+                errors.Add("User Id must be greater than 0");
             }
-
-            return new Response<string>
-            {
-                Message = "Success",
-                IsSuccess = true,
-                Payload = null
-            };
         }
 
         private static void PasswordValidate(string password, List<string> errors)

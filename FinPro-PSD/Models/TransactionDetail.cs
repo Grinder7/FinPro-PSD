@@ -14,6 +14,7 @@ namespace FinPro_PSD.Models
     
     public partial class TransactionDetail
     {
+        public int TransactionDetailID { get; set; }
         public int TransactionID { get; set; }
         public int MakeupID { get; set; }
         public int Quantity { get; set; }

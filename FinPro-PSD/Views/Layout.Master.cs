@@ -10,6 +10,7 @@ namespace FinPro_PSD.Views
 {
     public partial class Layout : System.Web.UI.MasterPage
     {
+        public LinkButton LogoutBtn { get { return LogoutLb; } }
         protected void Page_Load(object sender, EventArgs e)
         {
         }

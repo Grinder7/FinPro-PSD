@@ -11,6 +11,50 @@ namespace FinPro_PSD.Handlers
 {
     public class UserHandler
     {
+        public static Response<User> UpdateUserData(int userId, string userName, string userEmail, DateTime userDOB, string userGender)
+        {
+            User user = UserRepository.GetUserById(userId);
+            user.Username = userName;
+            user.UserEmail = userEmail;
+            user.UserDOB = userDOB;
+            user.UserGender = userGender;
+            if (UserRepository.UpdateUser(user) == 0)
+            {
+                return new Response<User>
+                {
+                    Message = "Failed to update user",
+                    IsSuccess = false,
+                    Payload = null
+                };
+            }
+            return new Response<User>
+            {
+                Message = "Successfuly update user",
+                IsSuccess = true,
+                Payload = user
+            };
+        }
+
+        public static Response<User> UpdateUserPassword(int userId, string newPassword)
+        {
+            User user = UserRepository.GetUserById(userId);
+            user.UserPassword = newPassword;
+            if (UserRepository.UpdateUser(user) == 0)
+            {
+                return new Response<User>
+                {
+                    Message = "Failed to update user",
+                    IsSuccess = false,
+                    Payload = null
+                };
+            }
+            return new Response<User>
+            {
+                Message = "Successfuly update user",
+                IsSuccess = true,
+                Payload = user
+            };
+        }
         public static int GenerateID()
         {
             User user = UserRepository.GetLastUser();
