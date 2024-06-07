@@ -11,6 +11,29 @@ namespace FinPro_PSD.Controllers
 {
     public class TransactionHeaderController
     {
+
+        public static Response<List<TransactionHeader>> GetAllTransactionHeaders()
+        {
+            return TransactionHeaderHandler.GetAllTransactionHeaders();
+        }
+
+        public static Response<List<TransactionHeader>> GetTransactionHeaderByUserId(int id)
+        {
+            return TransactionHeaderHandler.GetTransactionHeaderByUserId(id);
+
+        }
+
+        public static Response<TransactionHeader> GetTransactionHeaderById(int id)
+        {
+            return TransactionHeaderHandler.GetTransactionHeaderById(id);
+        }
+
+        public static Response<TransactionHeader> UpdateTransactionHeaderStatus(TransactionHeader transaction)
+        {
+            return TransactionHeaderHandler.UpdateTransactionHeaderStatus(transaction);
+        }
+
+
         public static Response<TransactionHeader> CheckoutCart(List<Cart> cartList)
         {
             List<string> errors = new List<string>();

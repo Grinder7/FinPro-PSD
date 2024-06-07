@@ -1,4 +1,6 @@
-﻿using FinPro_PSD.Models;
+﻿using FinPro_PSD.Handlers;
+using FinPro_PSD.Helpers;
+using FinPro_PSD.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +12,8 @@ namespace FinPro_PSD.Repositories
     {
         private static readonly Database1Entities db = new Database1Entities();
 
+        
+
         public static int InsertTransactionDetail(TransactionDetail transactionDetail)
         {
             db.TransactionDetails.Add(transactionDetail);
@@ -17,6 +21,11 @@ namespace FinPro_PSD.Repositories
         }
 
         public static List<TransactionDetail> GetTransactionDetailByTransactionId(int transactionId)
+        {
+            return db.TransactionDetails.Where(x => x.TransactionID == transactionId).ToList();
+        }
+
+        public static List<TransactionDetail> GetTransactionDetailById(int transactionId)
         {
             return db.TransactionDetails.Where(x => x.TransactionID == transactionId).ToList();
         }

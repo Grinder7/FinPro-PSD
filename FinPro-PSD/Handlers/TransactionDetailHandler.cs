@@ -32,6 +32,26 @@ namespace FinPro_PSD.Handlers
             };
         }
 
+        public static Response<List<TransactionDetail>> GetTransactionDetailById(int id)
+        {
+            List<TransactionDetail> transactionDetail = TransactionDetailRepository.GetTransactionDetailById(id);
+            if (transactionDetail != null)
+            {
+                return new Response<List<TransactionDetail>>
+                {
+                    Message = "Success",
+                    IsSuccess = true,
+                    Payload = transactionDetail
+                };
+            }
+            return new Response<List<TransactionDetail>>
+            {
+                Message = "no transaction detail",
+                IsSuccess = false,
+                Payload = null
+            };
+        }
+
         public static Response<TransactionDetail> DeleteTransactionDetails(int transactionId)
         {
             if (TransactionDetailRepository.DeleteTransactionDetails(transactionId) == 0)
