@@ -31,7 +31,7 @@
                         <asp:HyperLink ID="OrderMakeupHl" runat="server" NavigateUrl="~/Views/OrderMakeupPage.aspx">Order Makeup</asp:HyperLink>
                     </li>
                     <li>
-                        <asp:HyperLink ID="HistoryHl" runat="server">History</asp:HyperLink>
+                        <asp:HyperLink ID="HistoryHl" runat="server" NavigateUrl="~/Views/TransactionPage.aspx">History</asp:HyperLink>
                     </li>
                     <li>
                         <asp:HyperLink ID="ProfileHl" runat="server" NavigateUrl="~/Views/ProfilePage.aspx">Profile</asp:HyperLink>
@@ -47,13 +47,13 @@
 
                     </li>
                     <li>
-                        <asp:HyperLink ID="OrderQueueHl" runat="server">Order Queue</asp:HyperLink>
+                        <asp:HyperLink ID="OrderQueueHl" runat="server" NavigateUrl="~/Views/TransactionAdminPage.aspx">Order Queue</asp:HyperLink>
 
                     </li>
                     <li>
-                        <asp:HyperLink ID="ProfileAdminHl" runat="server">Profile</asp:HyperLink></li>
+                        <asp:HyperLink ID="ProfileAdminHl" runat="server" NavigateUrl="~/Views/ProfilePage.aspx">Profile</asp:HyperLink></li>
                     <li>
-                        <asp:HyperLink ID="TransactionReportHl" runat="server">Transaction Report</asp:HyperLink></li>
+                        <asp:HyperLink ID="TransactionReportHl" runat="server" NavigateUrl="~/Views/Report.aspx">Transaction Report</asp:HyperLink></li>
 
                     <%} %>
                     <li>
