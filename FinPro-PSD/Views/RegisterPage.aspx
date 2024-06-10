@@ -25,12 +25,13 @@
         <div>
             <asp:Label ID="DOBLbl" runat="server" Text="Date Of Birth"></asp:Label>
             <div>
-                <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+                <asp:TextBox runat="server" TextMode="Date" ID="DOBCalendar"/>
+                <%--<asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
                 <asp:UpdatePanel ID="DOBUpdatePanel" runat="server">
                     <ContentTemplate>
                         <asp:Calendar ID="DOBCalendar" runat="server"></asp:Calendar>
                     </ContentTemplate>
-                </asp:UpdatePanel>
+                </asp:UpdatePanel>--%>
             </div>
         </div>
         <div>

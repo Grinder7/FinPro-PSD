@@ -28,7 +28,7 @@ namespace FinPro_PSD.Views
         {
             string username = UsernameTbx.Text;
             string email = EmailTbx.Text;
-            DateTime dob = DOBCalendar.SelectedDate;
+            DateTime dob = DateTime.Parse(DOBCalendar.Text);
             string gender = GenderRbl.SelectedValue;
             string password = PasswordTbx.Text;
             string confirmPassword = ConfirmPasswordTbx.Text;

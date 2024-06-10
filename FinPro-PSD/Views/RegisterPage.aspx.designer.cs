@@ -78,31 +78,13 @@ namespace FinPro_PSD.Views
         protected global::System.Web.UI.WebControls.Label DOBLbl;
 
         /// <summary>
-        /// ScriptManager1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager1;
-
-        /// <summary>
-        /// DOBUpdatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel DOBUpdatePanel;
-
-        /// <summary>
         /// DOBCalendar control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Calendar DOBCalendar;
+        protected global::System.Web.UI.WebControls.TextBox DOBCalendar;
 
         /// <summary>
         /// PasswordLbl control.
